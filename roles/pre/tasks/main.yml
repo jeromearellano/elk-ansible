@@ -4,26 +4,13 @@
 #    state=present
 #    key=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
-- name: Download Elasticsearch RPM
-  ansible.builtin.get_url:
-    url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.9-x86_64.rpm
-    dest: /tmp/elasticsearch.rpm
-
-- name: Download Elasticsearch GPG key
-  ansible.builtin.get_url:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    dest: /tmp/elasticsearch-key
-
-- name: Import Elasticsearch GPG key
-  ansible.builtin.command: >
-    rpm --import /tmp/elasticsearch-key
-
-- name: create repo for elastic packages
+- name: Create repo for Elastic packages
   ansible.builtin.yum_repository:
     name: elasticsearch
     description: Elastic 7.x Repo
     baseurl: https://artifacts.elastic.co/packages/7.x/yum
     gpgcheck: yes
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 - name: Enable firewalld
   ansible.builtin.systemd:
