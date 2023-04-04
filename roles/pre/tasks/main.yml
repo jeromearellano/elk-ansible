@@ -4,6 +4,11 @@
 #    state=present
 #    key=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
+- name: Download Elasticsearch RPM
+  ansible.builtin.get_url:
+    url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.9-x86_64.rpm
+    dest: /tmp/elasticsearch.rpm
+
 - name: Download Elasticsearch GPG key
   ansible.builtin.get_url:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -11,7 +16,7 @@
 
 - name: Import Elasticsearch GPG key
   ansible.builtin.command: >
-    gpg --import /tmp/elasticsearch-key
+    rpm --import /tmp/elasticsearch-key
 
 - name: create repo for elastic packages
   ansible.builtin.yum_repository:

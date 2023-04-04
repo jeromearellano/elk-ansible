@@ -1,9 +1,14 @@
 ---
+- name: Install Elasticsearch RPM
+  ansible.builtin.rpm:
+    name: /tmp/elasticsearch.rpm
+    state: present
+    disable_gpg_check: no
+
 - name: install required applications
   ansible.builtin.yum:
     name:
-      - elasticsearch
-      - java-1.8.0-openjdk
+      - java-latest-openjdk
     state: latest
   notify: service
 
