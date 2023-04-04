@@ -12,6 +12,11 @@
     gpgcheck: yes
     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
+- name: Import Elasticsearch GPG key
+  ansible.builtin.rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+
 - name: Enable firewalld
   ansible.builtin.systemd:
     name: firewalld
