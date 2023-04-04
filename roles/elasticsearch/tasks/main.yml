@@ -3,6 +3,7 @@
   ansible.builtin.yum:
     name: elasticsearch
     state: latest
+    disable_gpg_check: yes
 
 - name: install required applications
   ansible.builtin.yum:
